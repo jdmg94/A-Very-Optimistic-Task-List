@@ -1,0 +1,6 @@
+.listWrapper {
+  flex: 2;
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+}
