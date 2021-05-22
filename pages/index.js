@@ -1,23 +1,27 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-
 import Input from '../components/Input'
+import { addItem } from './index.thunks'
 import Button from '../components/Button'
 import { Row } from '../components/Flexbox'
 import TaskList from '../sections/TaskList'
-import { addItem } from './index.thunks'
+import Notifications, { addNotification } from '../sections/Notifications'
 
 const App = () => {
   const dispatch = useDispatch()
   const [input, updateInput] = useState('')
   
   const submitItem = (evt) => {
-    evt.preventDefault();
+    evt.preventDefault()
 
     if (input.length > 0) {
-      dispatch(addItem(input))
-      updateInput('')      
+      updateInput('')
+      dispatch(addItem(input)).then(() => {
+        dispatch(addNotification('✅ Successfully added!'))
+      }).catch(() => {
+        dispatch(addNotification('❌ Error saving item!'))
+      })
     }
   }
   
@@ -27,7 +31,7 @@ const App = () => {
         <title>Optimistic UI Demo</title>
       </Head>
       <Row style={{ justifyContent: 'center' }}>
-        <h1>Very Optimistic To-Do List!</h1>        
+        <h1>Very Optimistic List!</h1>        
       </Row>
       <Row
         as="form"        
@@ -45,8 +49,9 @@ const App = () => {
         >
          ✅
         </Button>
-      </Row>               
+      </Row>     
       <TaskList />
+      <Notifications />
     </>
   )  
 }

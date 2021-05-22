@@ -39,5 +39,4 @@ export const produceWithReversal = (state, id, mutations = noop) => {
     mutations(draft)
     delete draft.undoStack[id] 
   })
-  
 }

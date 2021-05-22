@@ -1,75 +1,104 @@
+import { original } from 'immer'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { addItem, updateItem, removeItem } from './index.thunks'
-
+import { produceWithPatch, produceWithReversal } from '../utils/patchUtils'
 
 const TodoList = createSlice({
   name: 'TodoList',
   initialState: {
-    items: [],
+    items: {},
     status: 'idle',
-    error: null,
+    error: null, 
+    undoStack: {},
   },
   extraReducers: {
     [addItem.pending]: (state, action) => {
-      state.status = 'loading'
-      state.error = null
-      state.items.push({
-        id: action.meta.requestId,
-        message: action.meta.arg,
+      const id = action.meta.requestId
+
+      return produceWithPatch(state, id, draft => {
+        draft.error = null
+        draft.status = 'loading'
+
+        draft.items[id] = {
+          id,
+          message: action.meta.arg,
+        }
       })
     },
-    [addItem.fulfilled]: (state) => {
-      console.log('addition fullfilled!')
-      state.status = 'done'
+    [addItem.fulfilled]: (state, action) => {      
+      const id = action.meta.requestId
+
+      state.status = 'done'      
+      delete state.undoStack[id] 
     },
     [addItem.rejected]: (state, action) => {
-      state.status = 'error'
-      state.error = action.payload
+      const id = action.meta.requestId
 
-      const index = state.items.findIndex(item => item.id === action.meta.requestId)
-
-      if (index > -1) state.items.splice(index, 1)
-
+      return produceWithReversal(state, id, draft => {
+        draft.status = 'error'
+        draft.error = action.error.message
+      })
     },
     [updateItem.pending]: (state, action) => {
-      state.status = 'loading'
-      state.error = null
+      const id = action.meta.arg.id
       
-      const index = state.items.findIndex(item => item.id === action.meta.arg.id)
-
-      if (index > -1) state.items[index].message = action.meta.arg.message
-    },
-    [updateItem.fulfilled]: (state) => {
-      console.log('update fullfilled')
-      state.status = 'done'
+      return produceWithPatch(state, id, draft => {
+        const buffer = draft.items[id]
+        
+        draft.status = 'loading'
+        
+        if (buffer) {
+          buffer.message = action.meta.arg.message
+        }
+      })
+   },
+    [updateItem.fulfilled]: (state, action) => {
+      const id = action.meta.arg.id
+      
+      state.status = 'done'      
+      delete state.undoStack[id] 
     },
     [updateItem.rejected]: (state, action) => {
-      state.status = 'error'
-      state.error = action.payload
+      const id = action.meta.arg.id
 
-      const index = state.items.findIndex(item => item.id === action.meta.arg.id)
-
-      if (index > -1) state.items[index].message = action.meta.arg.original
-    },
+      const nextState = produceWithReversal(state, id, draft => {
+        draft.status = 'error'
+        draft.error = action.error.message       
+      })
+      
+      console.log(
+        'the next state', 
+        nextState, 
+        'the original state', 
+        original(state)
+      )
+      
+      return nextState
+    },   
     [removeItem.pending]: (state, action) => {
-      state.status = 'loading'
-      state.error = null
+      const id = action.meta.arg.id
 
-      const index = state.items.findIndex(item => item.id === action.meta.arg.id)
-
-      if (index > -1) state.items.splice(index, 1)
+      return produceWithPatch(state, id, draft => {
+        draft.status = 'loading'
+        
+        delete draft.items[id]
+     })
     },
-    [removeItem.fulfilled]: (state) => {
-       console.log('remove fullfilled!')
-       state.status = 'done'
+    [removeItem.fulfilled]: (state, action) => {      
+       const id = action.meta.arg.id
+      
+       state.status = 'done'      
+       delete state.undoStack[id] 
     },
     [removeItem.rejected]: (state, action) => {
-      state.status = 'error'
-      state.error = action.payload
-
-      if (!state.items.includes(action.meta.arg)) state.items.push(action.meta.arg)
+      const id = action.meta.arg.id
+      
+      return produceWithReversal(state, id, draft => {
+        draft.status = 'error'
+        draft.error = action.payload
+      })
     },
-  }
+ }
 })
 
 export default TodoList.reducer

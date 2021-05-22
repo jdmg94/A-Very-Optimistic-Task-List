@@ -1,2 +1,3 @@
-export { default } from './Notifications'
+export * from './Notifications.slice'
 export { default as reducer } from './Notifications.slice'
+export { default } from './Notifications'

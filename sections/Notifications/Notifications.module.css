@@ -1,0 +1,15 @@
+.container {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 0.75rem; 
+  left: 0.75rem;
+  display: flex;
+  height: 70%;
+  pointer-events: none;
+  margin-right: 0.75rem;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  align-self: stretch;
+  gap: 0.5rem;
+}

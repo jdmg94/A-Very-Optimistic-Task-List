@@ -4,9 +4,11 @@ import TaskItem from '../TaskItem'
 import styles from './TaskList.module.css'
 import { Column } from '../../components/Flexbox'
 
-const TaskList = () => {
-  const items = useSelector(state => state.todoList.items)
+const isEmpty = list => list?.length > 0
 
+const TaskList = () => {
+  const items = useSelector(state => Object.values(state.todoList.items))
+  
   return (
     <ul className={styles.listWrapper}>
       {items.map((item) => (

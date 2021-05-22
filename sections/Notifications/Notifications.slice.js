@@ -5,10 +5,12 @@ const Notifications = createSlice({
   initialState: [],
   reducers: {
     addNotification: (state, action) => {
-      state.push({ 
+      const buffer = { 
         id: nanoid(5),
         message: action.payload 
-      })
+      }          
+
+      state.push(buffer)
     },
     removeNotification: (state, action) => {
       const index = state.findIndex(item => item.id === action.payload.id)
@@ -17,3 +19,10 @@ const Notifications = createSlice({
     },
   }
 })
+
+export const {
+  addNotification,
+  removeNotification,
+} = Notifications.actions
+
+export default Notifications.reducer
