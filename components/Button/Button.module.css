@@ -1,7 +1,14 @@
 
 .button {
   padding: 10px;
-  marginleft: 8px;
+  margin-left: 8px;
   border-radius: 0.25rem;
   background-color: #FFF;
+}
+
+@media (prefers-color-scheme: dark) {
+  .button {
+    color: #FFF;
+    background-color: #000;
+  }
 }

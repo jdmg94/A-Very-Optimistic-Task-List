@@ -2,13 +2,8 @@
   display: flex;
   justify-content: flex-end;
   flex-direction: row;
-  margin: 8px 0px;
-}
-
-.listItem:before {
-  content: '';
-  display: flex;
   align-items: center;
+  margin: 8px 0px;
 }
 
 .listLabel {

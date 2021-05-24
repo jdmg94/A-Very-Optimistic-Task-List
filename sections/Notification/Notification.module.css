@@ -5,4 +5,13 @@
   align-self: stretch;
   border-radius: 0.25rem;
   border: 1px solid #4444;
+  background-color: #FFF;
+}
+
+@media (prefers-color-scheme: dark) {
+  .wrapper {
+    color: #FFF;
+    border-color: #FFF4;
+    background-color: #000;
+  }
 }

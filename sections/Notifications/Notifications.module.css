@@ -1,10 +1,11 @@
 .container {
-  position: absolute;
-  bottom: 1.25rem;
+  position: fixed;
+  bottom: 1.75rem;
   right: 0.75rem; 
   left: 0.75rem;
   display: flex;
-  height: 70%;
+  height: 100%;
+  overflow: hidden;
   pointer-events: none;
   margin-right: 0.75rem;
   flex-direction: column;
