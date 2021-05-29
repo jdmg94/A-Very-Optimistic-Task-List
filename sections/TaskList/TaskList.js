@@ -5,16 +5,15 @@ import TaskItem from '../TaskItem'
 import styles from './TaskList.module.css'
 
 const TaskList = memo(() => {
-  const items = useSelector(state => state.todoList.items)
+  const items = useSelector(({ todoList }) => todoList.items)
 
   return (
-    <ul className={styles.listWrapper}>
+    <div className={styles.listWrapper}>
       {Object.values(items).map((item) => (
-        <li key={item.id}>
-          <TaskItem item={item} />
-        </li>
+        <TaskItem key={item.id} item={item} />
       ))}
-    </ul>
+    </div>
   )
 })
+
 export default TaskList

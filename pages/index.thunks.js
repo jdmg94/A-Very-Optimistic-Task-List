@@ -7,7 +7,7 @@ export const addItem = createAsyncThunk('todos/add', async (data, {
 }) => {
   try {
     await sleep(2000)
-  //  throw new Error('test')
+//     throw new Error('test')
 
     return { data }
   } catch (error) {       
@@ -29,7 +29,7 @@ try {
 export const removeItem = createAsyncThunk('todos/remove', async (data, { rejectWithValue }) => {
 try {
     await sleep(1000)
-  //  throw new Error('test')
+//    throw new Error('test')
 
     return { data }
   } catch (error){

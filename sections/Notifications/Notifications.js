@@ -1,14 +1,14 @@
-import React, { memo } from "react";
-import { useTransition, config } from "react-spring";
-import { useSelector, useDispatch } from "react-redux";
+import { memo } from "react"
+import { useTransition, config } from "react-spring"
+import { useSelector, useDispatch } from "react-redux"
 
-import Notification from "../Notification";
-import styles from "./Notifications.module.css";
-import { removeNotification } from "../Notifications";
+import Notification from "../Notification"
+import styles from "./Notifications.module.css"
+import { removeNotification } from "../Notifications"
 
 const Notifications = memo(() => {
-  const dispatch = useDispatch();
-  const items = useSelector(({ Notifications }) => Notifications);
+  const dispatch = useDispatch()
+  const items = useSelector(({ Notifications }) => Notifications)
   const animation = useTransition(items, {
     keys: (item) => item.id,
     from: {
@@ -29,9 +29,9 @@ const Notifications = memo(() => {
       },
     ],
     onRest: (x, y, item) => {
-      dispatch(removeNotification(item));
+      dispatch(removeNotification(item))
     },
-  });
+  })
 
   return (
     <div className={styles.container}>
@@ -41,7 +41,7 @@ const Notifications = memo(() => {
         </Notification>
       ))}
     </div>
-  );
-});
+  )
+})
 
-export default Notifications;
+export default Notifications

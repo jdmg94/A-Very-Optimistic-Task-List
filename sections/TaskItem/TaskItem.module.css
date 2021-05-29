@@ -1,13 +1,12 @@
 .listItem {
   display: flex;
-  justify-content: flex-end;
   flex-direction: row;
   align-items: center;
-  margin: 8px 0px;
 }
 
 .listLabel {
   flex: 1;
+  gap: inherit;
   display: flex;
   align-items: center;
 }

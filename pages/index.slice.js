@@ -33,8 +33,13 @@ const TodoList = createSlice({
     [updateItem.fulfilled]: (state, action) => {
       const id = action.meta.arg.id
       const buffer = state.items[id]
+
       if (buffer) {
-        buffer.message = action.payload.changes.message
+        Object.keys(action.payload.changes)
+            .filter(key => key !== 'id')
+            .forEach(key => {
+              buffer[key] = action.payload.changes[key]
+            })
       }
       
       state.status = 'done'

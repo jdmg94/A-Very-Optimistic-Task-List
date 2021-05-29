@@ -1,14 +1,14 @@
 import React, { useRef, useEffect } from 'react'
-import  styles from './Input.module.css'
+import styles from './Input.module.css'
 
-const Input = props => {
+const Input = ({ autoFocus, ...props }) => {
   const inputRef = useRef()
   
   useEffect(() => {
-    if (props.autoFocus) {
+    if (autoFocus) {
       inputRef.current?.focus() 
     }   
-  }, [props.autoFocus])
+  }, [autoFocus])
   
   return <input className={styles.input} ref={inputRef} {...props} />
 }
