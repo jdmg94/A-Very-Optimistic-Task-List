@@ -1,0 +1,17 @@
+.container {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 0.75rem; 
+  left: 0.75rem;
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  margin-right: 0.75rem;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  align-self: stretch;
+  gap: 0.5rem;
+}

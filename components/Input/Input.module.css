@@ -1,6 +1,14 @@
 .input {
   height: 2rem;
   width: 100%;
+  padding: 0 0.5rem;
   border-radius: 0.25rem;
   font-size: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .input {
+    color: #FFF;
+    background-color: #000;
+  }
 }

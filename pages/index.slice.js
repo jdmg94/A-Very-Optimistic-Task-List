@@ -4,7 +4,7 @@ import { addItem, updateItem, removeItem } from './index.thunks'
 const TodoList = createSlice({
   name: 'TodoList',
   initialState: {
-   items: [],
+   items: {},
    error: null,
    status: 'idle', 
   },
@@ -14,13 +14,13 @@ const TodoList = createSlice({
       state.error = null
     }, 
     [addItem.fulfilled]: (state, action) => {
-      state.status = 'done'
-      state.items.push({
-        id: action.meta.requestId,
-        message: action.payload.data,
-      })
+      const id = action.meta.requestId
       
-      console.log('addition fullfilled!')
+      state.status = 'done'
+      state.items[id] = {
+        id,
+        message: action.payload.data,
+      }
     },
     [addItem.rejected]: (state, action) => {
       state.status = 'error'
@@ -31,12 +31,19 @@ const TodoList = createSlice({
       state.error = null
     },
     [updateItem.fulfilled]: (state, action) => {
-            state.status = 'done'
-      const index = state.items.findIndex(item => item.id === action.meta.arg.id)
+      const id = action.meta.arg.id
+      const buffer = state.items[id]
+
+      if (buffer) {
+        Object.keys(action.payload.changes)
+            .filter(key => key !== 'id')
+            .forEach(key => {
+              buffer[key] = action.payload.changes[key]
+            })
+      }
       
-      if (index > -1) state.items[index].message = action.payload.changes.message
-      
-      console.log('update fullfilled')
+      state.status = 'done'
+     
     },
     [updateItem.rejected]: (state, action) => {
       state.status = 'error'
@@ -47,12 +54,10 @@ const TodoList = createSlice({
       state.error = null
     },
     [removeItem.fulfilled]: (state, action) => {
+      const id = action.payload.data.id
+      
       state.status = 'done'
-      const index = state.items.findIndex(item => item.id === action.payload.data.id)
-      
-      if (index > -1) state.items.splice(index, 1)
-      
-      console.log('remove fullfilled!')
+      delete state.items[id]
     },
     [removeItem.rejected]: (state, action) => {
       state.status = 'error'

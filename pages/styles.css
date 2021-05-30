@@ -16,6 +16,13 @@ html, body, #__next {
   padding: 16px;
 }
 
+@media (prefers-color-scheme: dark) {
+  html {
+    color: #FFF;
+    background-color: #000;
+  }
+}
+
 @media (min-width: 720px) {
   #__next {
     padding: 16px 120px;

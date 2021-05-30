@@ -1,0 +1,17 @@
+.wrapper {
+  padding: 0.5rem;
+  box-shadow: 0px 1px 1px 0px #4444;
+  display: flex;
+  align-self: stretch;
+  border-radius: 0.25rem;
+  border: 1px solid #4444;
+  background-color: #FFF;
+}
+
+@media (prefers-color-scheme: dark) {
+  .wrapper {
+    color: #FFF;
+    border-color: #FFF4;
+    background-color: #000;
+  }
+}

@@ -3,4 +3,5 @@
   display: flex;
   align-self: stretch;
   flex-direction: column;
+  list-style: none;
 }
