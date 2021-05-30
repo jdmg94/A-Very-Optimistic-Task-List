@@ -4,8 +4,8 @@ import Input from "../../components/Input"
 import styles from "./TaskItem.module.css"
 import Button from "../../components/Button"
 import { addNotification } from "../Notifications"
-import useClickOutside from '../../utils/useClickOutside'
-import { removeItem, updateItem } from "../../pages/Home/index.thunks"
+import useClickOutside from "../../utils/useClickOutside"
+import { removeItem, updateItem } from "../../pages/Home"
 
 const TaskItem = ({ item }) => {
   const itemRef = useRef()
@@ -44,7 +44,7 @@ const TaskItem = ({ item }) => {
       done: true,
     })).then(() => {
       dispatch(
-        addNotification('Look at you handling business 💯')
+        addNotification("Look at you handling business 💯")
       )
     })
   }
@@ -70,7 +70,7 @@ const TaskItem = ({ item }) => {
       className={styles.listItem}
       onClick={() => !item.done && setEditing(true)}
     >
-      {item.done && <span style={{ paddingRight: '0.5rem' }}>✅</span>}
+      {item.done && <span style={{ paddingRight: "0.5rem" }}>✅</span>}
       {isEditing ? (
         <form
           onSubmit={saveChanges}

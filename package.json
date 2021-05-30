@@ -1,5 +1,6 @@
 {
   "entry_script": "start",
+  "license": "MIT",
   "entry_file": "pages/index.js",
   "scripts": {
     "start": "next dev -p 3450",
