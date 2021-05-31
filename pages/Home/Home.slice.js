@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { addItem, updateItem, removeItem } from './index.thunks'
+import { createSlice } from '@reduxjs/toolkit'
+import { addItem, updateItem, removeItem } from './Home.thunks'
 
 const TodoList = createSlice({
   name: 'TodoList',

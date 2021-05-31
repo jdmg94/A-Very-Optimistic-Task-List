@@ -2,7 +2,7 @@ import Head from "next/head"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 
-import { addItem } from "./index.thunks"
+import { addItem } from "./Home.thunks"
 import Input from "../../components/Input"
 import Button from "../../components/Button"
 import { Row } from "../../components/Flexbox"
