@@ -5,7 +5,7 @@ import styles from "./TaskItem.module.css"
 import Button from "../../components/Button"
 import { addNotification } from "../Notifications"
 import useClickOutside from "../../utils/useClickOutside"
-import { removeItem, updateItem } from "../../pages/Home"
+import { removeItem, updateItem } from "../../views/Home"
 
 const TaskItem = ({ item }) => {
   const itemRef = useRef()

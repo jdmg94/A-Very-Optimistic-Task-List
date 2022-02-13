@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 
 import Notification from "../Notification"
 import styles from "./Notifications.module.css"
-import { removeNotification } from "../Notifications"
+import { removeNotification } from "."
 
 const Notifications = memo(() => {
   const dispatch = useDispatch()

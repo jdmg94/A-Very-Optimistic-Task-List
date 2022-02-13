@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { addItem, updateItem, removeItem } from "../pages/Home"
-import { produceWithPatch, produceWithReversal } from "../utils/patchUtils"
+import { addItem, updateItem, removeItem } from "./Home.thunks"
+import { produceWithPatch, produceWithReversal } from "../../utils/patchUtils"
 
 const TodoList = createSlice({
     name: "TodoList",

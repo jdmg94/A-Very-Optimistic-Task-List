@@ -1,9 +1,9 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 
 //import todoList from './pages/index.slice' 
-import todoList from './sauce/index.slice.optimistic'
+import todoList from './src/views/Home/Home.slice.optimistic'
 
-import { reducer as Notifications } from './sections/Notifications'
+import { reducer as Notifications } from './src/sections/Notifications'
 
 export default configureStore({
   middleware: getDefaultMiddleware(),
